@@ -5,6 +5,12 @@ from bokeh.plotting import figure
 from bokeh.models import GraphRenderer, StaticLayoutProvider, Oval
 from bokeh.palettes import Spectral8
 
+from graph import *
+
+graph_data = Graph()
+graph_data.debug_create_test_data()
+print(graph_data.vertexes)
+
 N = 10
 node_indices = list(range(N))
 
@@ -12,14 +18,14 @@ debug_palette = Spectral8
 debug_palette.append('#ff0000')
 debug_palette.append('#0000ff')
 
-plot = figure(title='Graph Layout Demonstration', x_range=(-1.1, 1.1), y_range=(-1.1, 1.1),
+plot = figure(title='Graph Layout Demonstration', x_range=(0, 500), y_range=(0, 500),
               tools='', toolbar_location=None)
 
 graph = GraphRenderer()
 
 graph.node_renderer.data_source.add(node_indices, 'index')
 graph.node_renderer.data_source.add(debug_palette, 'color')
-graph.node_renderer.glyph = Oval(height=0.1, width=0.2, fill_color='color')
+graph.node_renderer.glyph = Oval(height=20, width=20, fill_color='color')
 
 graph.edge_renderer.data_source.data = dict(
     start=[0]*N,
